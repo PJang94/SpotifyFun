@@ -3,11 +3,34 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Configuration;
+using System.Net;
+using System.IO;
 
 namespace SpotifyFun.Controllers
 {
     public class HomeController : Controller
     {
+        public ActionResult Auth()
+        {
+            string clientId = ConfigurationManager.AppSettings["ida:clientId"];
+            string clientSecret = ConfigurationManager.AppSettings["ida:clientSecret"];
+            string redirectUri = "https://localhost:54876/Authorization/GoToAuthPage";
+
+            string url = string.Format("https://accounts.spotify.com/authorize?client_id={0}&response_type={1}&redirect_uri={2}"
+                , clientId, "code", HttpUtility.UrlEncode(redirectUri));
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
+
+            WebResponse response = request.GetResponse();
+
+            Stream stream = response.GetResponseStream();
+            StreamReader sr = new StreamReader(stream);
+
+            string loginHTML = sr.ReadToEnd();
+
+            return RedirectToAction("GoToAuthPage", "Authorization", new { html = loginHTML });
+        }
+
         public ActionResult Index()
         {
             return View();
