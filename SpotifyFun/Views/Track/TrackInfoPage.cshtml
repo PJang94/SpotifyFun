@@ -1,0 +1,15 @@
+﻿
+@{
+    ViewBag.Title = "TrackInfoPage";
+    dynamic trackJSON = TempData["trackJSON"];
+    string title = trackJSON.name;
+    string previewURL = trackJSON.preview_url;
+    string artist = trackJSON.artists[0].name;
+}
+
+<div id="trackInfo">
+    <h1>@title</h1>
+    <h2>@artist</h2>
+    <iframe type="text/html" width="480" height="100" src=@previewURL frameborder="0"></iframe>
+</div>
+

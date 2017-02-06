@@ -8,10 +8,10 @@ namespace SpotifyFun.Controllers
 {
     public class AuthorizationController : Controller
     {
-
-        public ActionResult GoToAuthPage(string html)
+        [ValidateInput(false)]
+        public ActionResult GoToAuthPage()
         {
-            ViewBag.html = html;
+            ViewBag.html = TempData["html"];
             return View("AuthPage");
         }
 

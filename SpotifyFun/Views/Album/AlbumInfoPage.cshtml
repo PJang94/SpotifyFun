@@ -1,0 +1,18 @@
+﻿
+@{
+    ViewBag.Title = "AlbumInfoPage";
+    dynamic albumJSON = TempData["albumJSON"];
+    string name = albumJSON.name;
+    string artist = albumJSON.artists[0].name;
+    string year = albumJSON.release_date;
+    string albumCover = albumJSON.images[0].url;
+
+}
+
+<div>
+    <h1>@name</h1>
+    <h2>@artist</h2>
+    <h2>@year</h2>
+    <img src=@albumCover>
+</div>
+

@@ -11,6 +11,7 @@ namespace SpotifyFun.Controllers
 {
     public class HomeController : Controller
     {
+        [ValidateInput(false)]
         public ActionResult Auth()
         {
             string clientId = ConfigurationManager.AppSettings["ida:clientId"];
@@ -25,10 +26,11 @@ namespace SpotifyFun.Controllers
 
             Stream stream = response.GetResponseStream();
             StreamReader sr = new StreamReader(stream);
-
+            
             string loginHTML = sr.ReadToEnd();
+            TempData["html"] = loginHTML;
 
-            return RedirectToAction("GoToAuthPage", "Authorization", new { html = loginHTML });
+            return RedirectToAction("GoToAuthPage", "Authorization");
         }
 
         public ActionResult Index()
