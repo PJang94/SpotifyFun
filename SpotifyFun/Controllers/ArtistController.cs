@@ -15,6 +15,7 @@ namespace SpotifyFun.Controllers
             string id = GetArtistIDFromName(artistName);
             dynamic artistJSON = SearchArtistByID(id);
             TempData["artistJSON"] = artistJSON;
+            TempData["artistAlbums"] = GetAlbumsFromArtistID(id).items;
 
             return View("ArtistInfoPage");
         }
@@ -37,6 +38,19 @@ namespace SpotifyFun.Controllers
         public dynamic SearchArtistByID(string id)
         {
             string url = string.Format("https://api.spotify.com/v1/{0}/{1}", "artists", id);
+
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
+            WebResponse response = request.GetResponse();
+            Stream stream = response.GetResponseStream();
+            StreamReader sr = new StreamReader(stream);
+            string jsonString = sr.ReadToEnd();
+
+            return Newtonsoft.Json.JsonConvert.DeserializeObject<dynamic>(jsonString);
+        }
+
+        public dynamic GetAlbumsFromArtistID(string id)
+        {
+            string url = string.Format("https://api.spotify.com/v1/artists/{0}/albums", id);
 
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
             WebResponse response = request.GetResponse();
