@@ -1,18 +1,32 @@
 ﻿
 @{
-    ViewBag.Title = "AlbumInfoPage";
+    ViewBag.Title = "Album Info Page";
     dynamic albumJSON = TempData["albumJSON"];
     string name = albumJSON.name;
     string artist = albumJSON.artists[0].name;
     string year = albumJSON.release_date;
     string albumCover = albumJSON.images[0].url;
-
+    dynamic tracks = albumJSON.tracks.items;
 }
+
+<script src="@Url.Content("../../Scripts/dynamicElements.js")" type="text/javascript"></script>
 
 <div>
     <h1>@name</h1>
     <h2>@artist</h2>
     <h2>@year</h2>
     <img src=@albumCover>
+
+    @{ 
+        foreach(var track in tracks)
+        {
+            <div>
+                <h3>@track.name</h3>
+                <button onclick="playPreview('@track.track_number', '@track.preview_url')">Play Preview</button>
+                <div id="@track.track_number">
+                </div>
+            </div> 
+        }
+    }
 </div>
 

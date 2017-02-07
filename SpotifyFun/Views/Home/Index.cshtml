@@ -2,21 +2,21 @@
     ViewBag.Title = "Home Page";
 }
 
-<div class="tracks" id="entryForm">
+<div class="entryForm" id="tracks">
     <form action="../Track/SearchTrackByName">
         <input type="text" name="trackName" placeholder="Enter the track name here..." />
         <input type="submit" value="Submit" />
     </form>
 </div>
-@*
-<div class="artists">
+
+<div class="entryForm" id="artists">
     <form action="../Artist/SearchArtistByName">
         <input type="text" name="artistName" placeholder="Enter the artist name here..." />
         <input type="submit" value="Submit" />
     </form>
 </div>
-*@
-<div class="albums">
+
+<div class="entryForm" id="albums">
     <form action="../Album/SearchAlbumByName">
         <input type="text" name="albumName" placeholder="Enter the album name here..." />
         <input type="submit" value="Submit" />
