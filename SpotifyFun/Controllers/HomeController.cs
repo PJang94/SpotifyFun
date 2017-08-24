@@ -6,35 +6,16 @@ using System.Web.Mvc;
 using System.Configuration;
 using System.Net;
 using System.IO;
+using SpotifyFun.Helpers;
 
 namespace SpotifyFun.Controllers
 {
     public class HomeController : Controller
     {
-        [ValidateInput(false)]
-        public ActionResult Auth()
-        {
-            string clientId = ConfigurationManager.AppSettings["ida:clientId"];
-            string clientSecret = ConfigurationManager.AppSettings["ida:clientSecret"];
-            string redirectUri = "https://localhost:54876/Authorization/GoToAuthPage";
-
-            string url = string.Format("https://accounts.spotify.com/authorize?client_id={0}&response_type={1}&redirect_uri={2}"
-                , clientId, "code", HttpUtility.UrlEncode(redirectUri));
-            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
-
-            WebResponse response = request.GetResponse();
-
-            Stream stream = response.GetResponseStream();
-            StreamReader sr = new StreamReader(stream);
-            
-            string loginHTML = sr.ReadToEnd();
-            TempData["html"] = loginHTML;
-
-            return RedirectToAction("GoToAuthPage", "Authorization");
-        }
-
         public ActionResult Index()
         {
+            AuthorizationHelper auth = new AuthorizationHelper();
+            Session["token"] = auth.GetAccessToken();
             return View();
         }
 

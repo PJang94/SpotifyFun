@@ -24,6 +24,7 @@ namespace SpotifyFun.Controllers
             string url = string.Format("https://api.spotify.com/v1/search?q={0}&type={1}", name, "album");
 
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
+            request.Headers.Add("Authorization", "Bearer " + Session["token"].ToString());
             WebResponse response = request.GetResponse();
             Stream stream = response.GetResponseStream();
             StreamReader sr = new StreamReader(stream);
@@ -39,6 +40,7 @@ namespace SpotifyFun.Controllers
             string url = string.Format("https://api.spotify.com/v1/{0}/{1}", "albums", id);
 
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
+            request.Headers.Add("Authorization", "Bearer " + Session["token"].ToString());
             WebResponse response = request.GetResponse();
             Stream stream = response.GetResponseStream();
             StreamReader sr = new StreamReader(stream);
@@ -52,6 +54,7 @@ namespace SpotifyFun.Controllers
             string url = string.Format("https://api.spotify.com/v1/{0}/{1}", "albums", id);
 
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
+            request.Headers.Add("Authorization", "Bearer " + Session["token"].ToString());
             WebResponse response = request.GetResponse();
             Stream stream = response.GetResponseStream();
             StreamReader sr = new StreamReader(stream);
