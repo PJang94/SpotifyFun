@@ -5,6 +5,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using SpotifyFun.Helpers;
 
 namespace SpotifyFun.Controllers
 {
@@ -12,55 +13,21 @@ namespace SpotifyFun.Controllers
     {
         public ActionResult SearchAlbumByName(string albumName)
         {
-            string id = GetAlbumIDFromName(albumName);
-            dynamic albumJSON = SearchAlbumByID(id);
+            AlbumHelper help = new AlbumHelper(Session["token"].ToString());
 
+            string id = help.GetAlbumIDFromName(albumName);
+
+            dynamic albumJSON = help.SearchAlbumByID(id);
             TempData["albumJSON"] = albumJSON;
+
             return View("AlbumInfoPage");
-        }
-
-        public string GetAlbumIDFromName(string name)
-        {
-            string url = string.Format("https://api.spotify.com/v1/search?q={0}&type={1}", name, "album");
-
-            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
-            request.Headers.Add("Authorization", "Bearer " + Session["token"].ToString());
-            WebResponse response = request.GetResponse();
-            Stream stream = response.GetResponseStream();
-            StreamReader sr = new StreamReader(stream);
-            string jsonString = sr.ReadToEnd();
-
-            dynamic json = Newtonsoft.Json.JsonConvert.DeserializeObject<dynamic>(jsonString);
-
-            return json.albums.items[0].id;
-        }
-
-        public dynamic SearchAlbumByID(string id)
-        {
-            string url = string.Format("https://api.spotify.com/v1/{0}/{1}", "albums", id);
-
-            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
-            request.Headers.Add("Authorization", "Bearer " + Session["token"].ToString());
-            WebResponse response = request.GetResponse();
-            Stream stream = response.GetResponseStream();
-            StreamReader sr = new StreamReader(stream);
-            string jsonString = sr.ReadToEnd();
-
-            return Newtonsoft.Json.JsonConvert.DeserializeObject<dynamic>(jsonString);
         }
 
         public dynamic SearchAlbumByIDFromArtistPage(string id)
         {
-            string url = string.Format("https://api.spotify.com/v1/{0}/{1}", "albums", id);
+            AlbumHelper help = new AlbumHelper(Session["token"].ToString());
 
-            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
-            request.Headers.Add("Authorization", "Bearer " + Session["token"].ToString());
-            WebResponse response = request.GetResponse();
-            Stream stream = response.GetResponseStream();
-            StreamReader sr = new StreamReader(stream);
-            string jsonString = sr.ReadToEnd();
-
-            TempData["albumJSON"] = Newtonsoft.Json.JsonConvert.DeserializeObject<dynamic>(jsonString);
+            TempData["albumJSON"] = help.SearchAlbumByID(id);
 
             return View("AlbumInfoPage");
         }
