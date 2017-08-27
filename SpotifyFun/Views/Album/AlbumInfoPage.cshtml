@@ -25,6 +25,7 @@
                 @if (@track.preview_url != null)
                 {
                     <div class="previewButton">
+                        <img src="~/Content/playbutton.png" onclick="playPreview('playPreviewDiv', @previewURL')" />
                         <button onclick="playPreview('@track.track_number', '@track.preview_url')">Play Preview</button>
                     </div>
                 }

@@ -15,6 +15,7 @@
     @if (@previewURL != null)
     {
         <div class="previewButton">
+            <img src="~/Content/playbutton.png" onclick="playPreview('playPreviewDiv', @previewURL')" />
             <button onclick="playPreview('playPreviewDiv', '@previewURL')">Play Preview</button>
         </div>
     }
