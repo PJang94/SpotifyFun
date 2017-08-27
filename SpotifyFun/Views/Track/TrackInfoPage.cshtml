@@ -12,10 +12,13 @@
 <div id="trackInfo">
     <h1>@title (@trackJSON.id)</h1>
     <h2>@Html.ActionLink(@artist, "SearchArtistByName", "Artist", new { artistName = @artist }, null)</h2>
-    <div class="previewButton">
-        <button onclick="playPreview('playPreviewDiv', '@previewURL')">Play Preview</button>
-    </div>
-    
+    @if (@previewURL != null)
+    {
+        <div class="previewButton">
+            <button onclick="playPreview('playPreviewDiv', '@previewURL')">Play Preview</button>
+        </div>
+    }
+
 
     <div id="playPreviewDiv">
     </div>

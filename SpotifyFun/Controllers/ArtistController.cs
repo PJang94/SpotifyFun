@@ -11,6 +11,11 @@ namespace SpotifyFun.Controllers
 {
     public class ArtistController : Controller
     {
+        public ActionResult GoToArtistSearchPage()
+        {
+            return View("ArtistSearchPage");
+        }
+
         public ActionResult SearchArtistByName(string artistName)
         {
             ArtistHelper help = new ArtistHelper(Session["token"].ToString());

@@ -22,10 +22,12 @@
         {
             <div>
                 <h3>@track.name</h3>
-                <div class="previewButton">
-                    <button onclick="playPreview('@track.track_number', '@track.preview_url')">Play Preview</button>
-                </div>
-                
+                @if (@track.preview_url != null)
+                {
+                    <div class="previewButton">
+                        <button onclick="playPreview('@track.track_number', '@track.preview_url')">Play Preview</button>
+                    </div>
+                }
                 <div id="@track.track_number">
                 </div>
             </div> 

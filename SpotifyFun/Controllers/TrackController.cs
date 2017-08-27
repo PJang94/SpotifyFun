@@ -11,6 +11,11 @@ namespace SpotifyFun.Controllers
 {
     public class TrackController : Controller
     {
+        public ActionResult GoToTrackSearchPage()
+        {
+            return View("TrackSearchPage");
+        }
+
         public ActionResult SearchTrackByName(string trackName)
         {
             TrackHelper help = new TrackHelper(Session["token"].ToString());
