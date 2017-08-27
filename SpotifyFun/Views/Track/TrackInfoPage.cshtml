@@ -10,12 +10,11 @@
 <script src="@Url.Content("../../Scripts/dynamicElements.js")" type="text/javascript"></script>
 
 <div id="trackInfo">
-    <h1>@title (@trackJSON.id)</h1>
+    <h1>@title</h1>
     <h2>@Html.ActionLink(@artist, "SearchArtistByName", "Artist", new { artistName = @artist }, null)</h2>
     @if (@previewURL != null)
     {
         <div class="previewButton">
-            <img src="~/Content/playbutton.png" onclick="playPreview('playPreviewDiv', @previewURL')" />
             <button onclick="playPreview('playPreviewDiv', '@previewURL')">Play Preview</button>
         </div>
     }

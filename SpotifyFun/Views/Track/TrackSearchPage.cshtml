@@ -1,5 +1,7 @@
 ﻿@{
     ViewBag.Title = "Track Search";
+    ViewBag.NoTrackFoundMessage = "That search returned no track results. Please try again.";
+    bool noAlbumFound = (TempData["noTrackFound"] == null) ? false : true;
 }
 
 <div class="entryForm" id="tracks">

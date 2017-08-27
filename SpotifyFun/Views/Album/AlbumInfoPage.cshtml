@@ -12,7 +12,7 @@
 <script src="@Url.Content("../../Scripts/dynamicElements.js")" type="text/javascript"></script>
 
 <div>
-    <h1>@name (@albumJSON.id)</h1>
+    <h1>@name</h1>
     <h2>@Html.ActionLink(@artist, "SearchArtistByName", "Artist", new { artistName = @artist }, null)</h2>
     <h2>@year</h2>
     <img src=@albumCover>
@@ -25,7 +25,6 @@
                 @if (@track.preview_url != null)
                 {
                     <div class="previewButton">
-                        <img src="~/Content/playbutton.png" onclick="playPreview('playPreviewDiv', @previewURL')" />
                         <button onclick="playPreview('@track.track_number', '@track.preview_url')">Play Preview</button>
                     </div>
                 }

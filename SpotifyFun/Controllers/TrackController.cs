@@ -21,6 +21,13 @@ namespace SpotifyFun.Controllers
             TrackHelper help = new TrackHelper(Session["token"].ToString());
 
             string id = help.GetTrackIDFromName(trackName);
+
+            if(id.Equals("None"))
+            {
+                TempData["noTrackFound"] = true;
+                return View("TrackSearchPage");
+            }
+
             dynamic trackJSON = help.SearchTrackByID(id);
             TempData["trackJSON"] = trackJSON;
 

@@ -1,5 +1,13 @@
 ﻿@{
     ViewBag.Title = "Artist Search";
+    ViewBag.NoArtistFoundMessage = "That search returned no artist results. Please try again.";
+    bool noArtistFound = (TempData["noArtistFound"] == null) ? false : true;
+
+}
+
+@if(noArtistFound)
+{
+    <h3 class="noResultsMessage">@ViewBag.NoArtistFoundMessage</h3>
 }
 
 <div class="entryForm" id="artists">

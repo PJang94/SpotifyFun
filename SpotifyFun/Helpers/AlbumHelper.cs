@@ -16,6 +16,12 @@ namespace SpotifyFun.Helpers
             this.token = token;
         }
 
+        /// GetAlbumIDFromName
+        /// <summary>
+        /// Takes an album name and searches for its unique spotify id
+        /// </summary>
+        /// <param name="name">The name of the album</param>
+        /// <returns>The unique spotify id for the album</returns>
         public string GetAlbumIDFromName(string name)
         {
             string url = string.Format("https://api.spotify.com/v1/search?q={0}&type={1}", name, "album");
@@ -29,9 +35,22 @@ namespace SpotifyFun.Helpers
 
             dynamic json = Newtonsoft.Json.JsonConvert.DeserializeObject<dynamic>(jsonString);
 
-            return json.albums.items[0].id;
+            if (json.albums.items.Count == 0)
+            {
+                return "None";
+            }
+            else
+            {
+                return json.albums.items[0].id;
+            }
         }
 
+        /// SearchAlbumByID
+        /// <summary>
+        /// Takes an album id and searches for information on the album
+        /// </summary>
+        /// <param name="id">The unique spotify id of the album</param>
+        /// <returns>the json return from the request</returns>
         public dynamic SearchAlbumByID(string id)
         {
             string url = string.Format("https://api.spotify.com/v1/{0}/{1}", "albums", id);

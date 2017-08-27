@@ -16,6 +16,12 @@ namespace SpotifyFun.Helpers
             this.token = token;
         }
 
+        /// GetTrackIDFromName
+        /// <summary>
+        /// Gets the unique spotify id for a track given the title
+        /// </summary>
+        /// <param name="name">the name of the track</param>
+        /// <returns>the id of the track</returns>
         public string GetTrackIDFromName(string name)
         {
             string url = string.Format("https://api.spotify.com/v1/search?q={0}&type={1}", name, "track");
@@ -29,9 +35,22 @@ namespace SpotifyFun.Helpers
 
             dynamic json = Newtonsoft.Json.JsonConvert.DeserializeObject<dynamic>(jsonString);
 
-            return json.tracks.items[0].id;
+            if (json.tracks.items.Count == 0)
+            {
+                return "None";
+            }
+            else
+            {
+                return json.tracks.items[0].id;
+            }
         }
 
+        /// SearchTrackByID
+        /// <summary>
+        /// Gets information on a track using its unique spotify id
+        /// </summary>
+        /// <param name="id">The id of the track</param>
+        /// <returns>the return json of the request</returns>
         public dynamic SearchTrackByID(string id)
         {
             string url = string.Format("https://api.spotify.com/v1/{0}/{1}", "tracks", id);

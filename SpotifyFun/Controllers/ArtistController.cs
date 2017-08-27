@@ -21,6 +21,13 @@ namespace SpotifyFun.Controllers
             ArtistHelper help = new ArtistHelper(Session["token"].ToString());
 
             string id = help.GetArtistIDFromName(artistName);
+
+            if (id.Equals("none"))
+            {
+                TempData["noArtistFound"] = true;
+                return View("ArtistSearchPage");
+            }
+
             dynamic artistJSON = help.SearchArtistByID(id);
             TempData["artistJSON"] = artistJSON;
             TempData["artistAlbums"] = help.GetAlbumsFromArtistID(id).items;

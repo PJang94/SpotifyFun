@@ -5,3 +5,7 @@
 .previewButton {
     padding-top: 15px;
 }
+
+.noResultsMessage {
+    color: red;
+}
