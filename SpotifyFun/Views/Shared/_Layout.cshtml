@@ -25,6 +25,16 @@
                     <li>@Html.ActionLink("Album", "GoToAlbumSearchPage", "Album")</li>
                     <li>@Html.ActionLink("Artist", "GoToArtistSearchPage", "Artist")</li>
                     <li>@Html.ActionLink("Track", "GoToTrackSearchPage", "Track")</li>
+                    @{ 
+                        if(Session["Username"] == null)
+                        {
+                            @Html.ActionLink("Login", "Login", "Authorization");
+                        }
+                        else
+                        {
+                            Session["Username"].ToString();
+                        }
+                    }
                 </ul>
             </div>
         </div>

@@ -47,5 +47,21 @@ namespace SpotifyFun.Helpers
             var plainTextBytes = System.Text.Encoding.UTF8.GetBytes(plainText);
             return System.Convert.ToBase64String(plainTextBytes);
         }
+
+        public void UserLogin()
+        {
+            string clientID = ConfigurationManager.AppSettings["ida:clientID"].ToString();
+            string responseType = "code";
+            string redirectURI = HttpContext.Current.Server.HtmlEncode(ConfigurationManager.AppSettings["ida:loginRedirectURI"].ToString());
+            string scope = ConfigurationManager.AppSettings["ida:accessScope"];
+
+            string url = string.Format("https://accounts.spotify.com/authorize/?client_id={0}&response_type={1}&redirect_uri={3}&scope={4}",
+                                        clientID, responseType, redirectURI, scope);
+
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
+
+            WebResponse response = request.GetResponse();
+
+        }
     }
 }
