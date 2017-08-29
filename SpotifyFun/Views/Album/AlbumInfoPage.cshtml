@@ -6,7 +6,7 @@
     string year = albumJSON.release_date;
     string albumCover = albumJSON.images[0].url;
     dynamic tracks = albumJSON.tracks.items;
-    string albumURI = albumJSON.external_urls.spotify.ToString();
+    string albumURI = albumJSON.uri.ToString();
 
     ViewBag.Title = @name;
 
@@ -18,8 +18,7 @@
 <div>
     <h1>@name</h1>
     <h2>@Html.ActionLink(@artist, "SearchArtistByName", "Artist", new { artistName = @artist }, null)</h2>
-    <h2>@year</h2>
     <img src=@albumCover>
-    <iframe src=@url width="500" height="600" frameborder="0" allowtransparency="true" ></iframe>
+    <iframe align="right" src=@url width="500" height="640" frameborder="0" allowtransparency="true" ></iframe>
 </div>
 
