@@ -6,7 +6,11 @@
     string year = albumJSON.release_date;
     string albumCover = albumJSON.images[0].url;
     dynamic tracks = albumJSON.tracks.items;
+    string albumURI = albumJSON.external_urls.spotify.ToString();
+
     ViewBag.Title = @name;
+
+    string url = string.Format("https://open.spotify.com/embed?uri={0}&view={1}", albumURI, "list");
 }
 
 <script src="@Url.Content("../../Scripts/dynamicElements.js")" type="text/javascript"></script>
@@ -16,22 +20,6 @@
     <h2>@Html.ActionLink(@artist, "SearchArtistByName", "Artist", new { artistName = @artist }, null)</h2>
     <h2>@year</h2>
     <img src=@albumCover>
-
-    @{ 
-        foreach(var track in tracks)
-        {
-            <div>
-                <h3>@track.name</h3>
-                @if (@track.preview_url != null)
-                {
-                    <div class="previewButton">
-                        <button onclick="playPreview('@track.track_number', '@track.preview_url')">Play Preview</button>
-                    </div>
-                }
-                <div id="@track.track_number">
-                </div>
-            </div> 
-        }
-    }
+    <iframe src=@url width="500" height="600" frameborder="0" allowtransparency="true" ></iframe>
 </div>
 

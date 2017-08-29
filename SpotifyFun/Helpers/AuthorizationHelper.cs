@@ -55,7 +55,7 @@ namespace SpotifyFun.Helpers
             string redirectURI = HttpContext.Current.Server.HtmlEncode(ConfigurationManager.AppSettings["ida:loginRedirectURI"].ToString());
             string scope = ConfigurationManager.AppSettings["ida:accessScope"];
 
-            string url = string.Format("https://accounts.spotify.com/authorize/?client_id={0}&response_type={1}&redirect_uri={3}&scope={4}",
+            string url = string.Format("https://accounts.spotify.com/authorize/?client_id={0}&response_type={1}&redirect_uri={2}&scope={3}",
                                         clientID, responseType, redirectURI, scope);
 
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);

@@ -3,3 +3,14 @@
 }
 
 <h2>Hello!</h2>
+
+@{
+    if (Session["Username"] == null)
+    {
+        @Html.ActionLink("Login", "Login", "Authorization");
+    }
+    else
+    {
+        Session["Username"].ToString();
+    }
+}
