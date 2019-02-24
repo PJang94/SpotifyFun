@@ -1,0 +1,23 @@
+﻿
+@{ 
+    dynamic artistJSON = TempData["artistJSON"];
+    dynamic albums = TempData["artistAlbums"];
+    string name = artistJSON.name;
+    string artistImage = artistJSON.images[0].url;
+    string artistURI = artistJSON.uri.ToString();
+
+    string url = string.Format("https://open.spotify.com/embed?uri={0}&view={1}", artistURI, "cover");
+
+    ViewBag.Title = @name;
+}
+
+<h1>@name</h1>
+<img src=@artistImage>
+<iframe align="right" src=@url width="500" height="640" frameborder="0" allowtransparency="true"></iframe>
+@{ 
+    foreach(var album in albums)
+    {
+        <h2>@Html.ActionLink((string)@album.name, "SearchAlbumByIDFromArtistPage", "Album", new { id = @album.id }, null)</h2>
+    }
+}
+

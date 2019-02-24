@@ -1,0 +1,18 @@
+﻿@{
+    ViewBag.Title = "Albums Search";
+    ViewBag.NoAlbumFoundMessage = "That search returned no album results. Please try again.";
+    bool noAlbumFound = (TempData["noArtistFound"] == null) ? false: true;
+}
+
+@if(noAlbumFound)
+{
+    <h3 class="noResultsMessage">@ViewBag.NoAlbumFoundMessage</h3>
+}
+
+<div class="entryForm" id="albums">
+    <form action="../Album/SearchAlbumByName">
+        <input type="text" name="albumName" placeholder="Enter the album name here..." />
+        <input type="submit" value="Submit" />
+    </form>
+</div>
+

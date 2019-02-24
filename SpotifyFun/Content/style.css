@@ -1,0 +1,11 @@
+﻿.entryForm {
+    padding:15px;
+}
+
+.previewButton {
+    padding-top: 15px;
+}
+
+.noResultsMessage {
+    color: red;
+}

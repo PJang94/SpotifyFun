@@ -3,22 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using SpotifyFun.Helpers;
 
 namespace SpotifyFun.Controllers
 {
     public class AuthorizationController : Controller
     {
-
-        public ActionResult GoToAuthPage(string html)
+        public ActionResult Login()
         {
-            ViewBag.html = html;
-            return View("AuthPage");
-        }
-
-        // GET: Authorization
-        public ActionResult AuthRedirect(string code, string state)
-        {
-            Session["token"] = code;
+            new AuthorizationHelper().UserLogin();
             return RedirectToAction("Index", "Home");
         }
     }
