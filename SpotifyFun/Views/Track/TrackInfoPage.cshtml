@@ -3,7 +3,10 @@
     string title = trackJSON.name;
     string previewURL = trackJSON.preview_url;
     string artist = trackJSON.artists[0].name;
-    string previewButton = "<iframe type=\"text/html\" width=\"480\" height=\"100\" src="+@previewURL+" frameborder=\"0\"></iframe>";
+    string trackURI = trackJSON.uri.ToString();
+
+    string url = string.Format("https://open.spotify.com/embed?uri={0}&view={1}", trackURI, "cover");
+   
     ViewBag.Title = @title;
 }
 
@@ -12,16 +15,7 @@
 <div id="trackInfo">
     <h1>@title</h1>
     <h2>@Html.ActionLink(@artist, "SearchArtistByName", "Artist", new { artistName = @artist }, null)</h2>
-    @if (@previewURL != null)
-    {
-        <div class="previewButton">
-            <button onclick="playPreview('playPreviewDiv', '@previewURL')">Play Preview</button>
-        </div>
-    }
-
-
-    <div id="playPreviewDiv">
-    </div>
+    <iframe src=@url width="500" height="640" frameborder="0" allowtransparency="true"></iframe>
     
 </div>
 
